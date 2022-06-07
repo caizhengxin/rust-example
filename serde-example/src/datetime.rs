@@ -74,7 +74,7 @@ fn test_datetime() {
     //     datetimestop: 2022-05-30T19:00:00+08:00,
     // }
  
-    let serialized = serde_json::to_string_pretty(&data).unwrap();
+    let serialized = serde_json::to_string(&data).unwrap();
     println!("{}", serialized);
 
     // {
