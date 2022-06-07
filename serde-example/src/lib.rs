@@ -9,3 +9,6 @@ pub mod vec_example;
 pub mod array_example;
 pub mod map_example;
 pub mod datetime;
+pub mod map_flatten;
+pub mod struct_flatten_example;
+pub mod hex_example;
