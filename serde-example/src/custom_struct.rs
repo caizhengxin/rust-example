@@ -1,6 +1,7 @@
 use std::fmt;
 use serde::{Serialize, Deserialize};
 use serde::de::{Deserializer, Visitor};
+use serde::ser::SerializeStruct;
 
 
 // 该例子主要学习如果对Struct类型，自定义序列化和反序列化内容
