@@ -12,3 +12,4 @@ pub mod datetime;
 pub mod map_flatten;
 pub mod struct_flatten_example;
 pub mod hex_example;
+pub mod custom_struct;
