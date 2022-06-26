@@ -74,7 +74,7 @@ impl<'de> Deserialize<'de> for JkcStruct {
                     A: serde::de::MapAccess<'de>
             {
                 let mut tpe: u8 = 0;
-                let mut value: Option<serde_json::Value> = None;
+                let mut value = None;
 
                 while let Some(key) = map.next_key::<&str>()? {
                     match key {
@@ -82,47 +82,17 @@ impl<'de> Deserialize<'de> for JkcStruct {
                             tpe = map.next_value()?;
                         },
                         "value" => {
-                            value = map.next_value()?;
+                            match tpe {
+                                1 => { value = Some(map.next_value::<Vec<JkcStruct1>>()?.iter().map(|&v| JkcEnum::JkcStruct1(v)).collect()); },
+                                2 => { value = Some(map.next_value::<Vec<JkcStruct2>>()?.iter().map(|&v| JkcEnum::JkcStruct2(v)).collect()); },
+                                _ => {},
+                            }
                         },
                         _ => {},
                     }
                 }
 
-                if value.is_none() {
-                    return Ok(JkcStruct{tpe: tpe, value: None});
-                }
-
-                let mut value2: Option<Vec<JkcEnum>> = None;
-
-                match tpe {
-                    1 => {
-                        let ret = serde_json::from_value::<Vec<JkcStruct1>>(value.unwrap());
-
-                        match ret {
-                            Ok(v) => {
-                                value2 = Some(v.iter().map(|&v| JkcEnum::JkcStruct1(v)).collect());
-                            },
-                            Err(e) => {
-                                return Err(serde::de::Error::custom(format!("deserialize JkcStruct error {}.", e)));
-                            },
-                        }
-                    },
-                    2 => {
-                        let ret = serde_json::from_value::<Vec<JkcStruct2>>(value.unwrap());
-
-                        match ret {
-                            Ok(v) => {
-                                value2 = Some(v.iter().map(|&v| JkcEnum::JkcStruct2(v)).collect());
-                            },
-                            Err(e) => {
-                                return Err(serde::de::Error::custom(format!("deserialize JkcStruct error {}.", e)));
-                            },
-                        }
-                    },
-                    _ => {},
-                }
-
-                Ok(JkcStruct{tpe: tpe, value: value2})
+                Ok(JkcStruct{tpe: tpe, value: value})
             }
         }
 
@@ -132,7 +102,7 @@ impl<'de> Deserialize<'de> for JkcStruct {
 
 
 #[test]
-fn test_custom_struct() {
+fn test_custome_struct() {
     let value = r#"{"type":2,"value":[{"a":1,"b":2}]}"#;
 
     let value: JkcStruct = serde_json::from_str(&value).unwrap();
