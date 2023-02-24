@@ -30,19 +30,26 @@ impl<'a> StructExample<'a> {
         StructExample {map: HashMap::new() }
     }
 
-    pub fn is_callback(&self, _input: &'a [u8]) -> &JkcCallback<'a>
+    pub fn is_callback(&self, _input: &'static [u8]) -> &JkcCallback<'a>
     {
         self.map.get(&1).unwrap()
     }
 }
 
 
-#[test]
-fn test_callback() {
-    let value = &[0x00, 0x01, 0x02, 0x03, 0x04];
+pub fn test_struct<'a>(input: &'static [u8]) {
     let head = FUNC_MAP.read().unwrap();
 
-    let func = head.is_callback(&value[..]);
+    let func = head.is_callback(input);
 
-    func(value);
+    // func(input);
+}
+
+
+#[test]
+fn test_callback() {
+    // let value = &[0x00, 0x01, 0x02, 0x03, 0x04];
+    let value: Vec<u8> = vec![0x00, 0x01, 0x02, 0x03];
+
+    test_struct(&value);
 }

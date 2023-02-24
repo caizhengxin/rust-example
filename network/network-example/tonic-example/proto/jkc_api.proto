@@ -1,0 +1,29 @@
+syntax = "proto3";
+package rpcapi;
+
+
+import "google/protobuf/empty.proto";
+
+
+service ApiService {
+    // rpc insert_whitelist_rules(ApiRequest) returns (ApiResponse);
+    // rpc update_whitelist_rules(ApiRequest) returns (ApiResponse);
+    // rpc delete_whitelist_rules(ApiDeleteListRequest) returns (ApiResponse);
+    rpc flush_rules(google.protobuf.Empty) returns (google.protobuf.Empty);
+    // rpc loads_rules(ApiRequest) returns (ApiResponse);
+}
+
+
+message ApiRequest {
+    string json_args = 1;
+}
+
+
+message ApiDeleteListRequest {
+    repeated uint32 rid = 1;
+}
+
+
+message ApiResponse {
+    bool result = 1;
+}

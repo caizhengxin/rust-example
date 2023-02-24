@@ -1,0 +1,20 @@
+syntax = "proto3";
+package rpcapi;
+
+
+import public "google/protobuf/empty.proto";
+
+
+service ConfigService {
+    rpc loads_config(ConfigRequest) returns (ConfigResponse);
+}
+
+
+message ConfigRequest {
+    string json_args = 1;
+}
+
+
+message ConfigResponse {
+    bool result = 1;
+}

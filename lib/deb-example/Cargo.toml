@@ -1,0 +1,17 @@
+[package]
+name = "deb-example"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+
+
+[package.metadata.deb]
+maintainer = "jankincai <jankincai12@gmail.com>"
+copyright = "jankincai <jankincai12@gmail.com>"
+# pre-depends = "jankincai"
+maintainer-scripts = "scripts"
+
+[package.metadata.deb.systemd-units]
