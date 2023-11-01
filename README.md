@@ -39,3 +39,5 @@ Rust新手学习笔记，主要记录一些常见的编程例子和Rust库的基
 ## 跨语言互操作
 
 - [x] [libpcap-rs](./ffi/libpcap-rs/): Rust访问C库例子
+- [x] [jankincai-ffi](./ffi/jankincai-ffi/): Rust访问C代码例子
+- [ ] C访问Rust代码例子
