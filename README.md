@@ -46,6 +46,10 @@ Rust新手学习笔记，主要记录一些常见的编程例子和Rust库的基
 
 - TODO
 
+## 宏例子
+
+- [x] [jkcenum](https://github.com/caizhengxin/jkcenum)
+
 ## 跨语言互操作
 
 - [x] [libpcap-rs](./ffi/libpcap-rs/): Rust访问C库例子
