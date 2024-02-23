@@ -51,6 +51,8 @@ fn main() {
     let t2 = std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).unwrap_or_default().as_secs_f64();
     println!("time(s): {}", t2 - t1);
 
+    let _ = unsafe { Box::from_raw(pktinfo_ptr) };
+
     // time(s): 0.010022163391113281
     // time(s): 0.011680364608764648
     // time(s): 0.024011850357055664
